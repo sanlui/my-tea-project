@@ -1,0 +1,11 @@
+name: TeaDApp
+version: "1.0.0"
+repository:
+  type: git
+  url: https://github.com/sanlui/TeaDApp.git
+
+codeOwners:
+  - "0x00294e084a594b6b4baf5395134cfbf853e39240"
+
+quorum: 2
+constitutionVersion: "1.0"
