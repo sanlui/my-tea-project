@@ -1,10 +1,19 @@
 {
-  "project_name": "my-tea-project",
+  "project_name": "My Tea Project",
+  "description": "An example project for the Tea Protocol",
   "contributors": [
-    "sanlui"
+    {
+      "name": "Hassan El Buiz",
+      "role": "Main Contributor",
+      "github": "https://github.com/username"
+    }
   ],
   "quorum_rules": {
-    "approval_threshold": 0.5,
-    "voting_power": "equal"
+    "min_contributors": 2,
+    "voting_rights": "equal"
+  },
+  "vulnerability_management": {
+    "reporting_address": "security@mytea.com",
+    "process": "All vulnerability reports should be sent to this email."
   }
 }
