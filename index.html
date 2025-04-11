@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simple DApp - Tea Sepolia</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js"></script>
+  <style>
+    /* Stili di base */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f7fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    #status {
+      font-size: 18px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    /* Pulsanti */
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin: 10px;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Animazione al caricamento */
+    .container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Invia 0.001 TEA (Tea Sepolia)</h1>
+    <button id="connectBtn">🔗 Connetti MetaMask</button>
+    <br/><br/>
+    <button id="sendBtn" disabled>🚀 GM</button>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    let provider;
+    let signer;
+
+    // Funzione per connettere MetaMask alla rete Tea Sepolia
+    document.getElementById('connectBtn').onclick = async () => {
+      if (typeof window.ethereum !== 'undefined') {
+        try {
+          // Richiesta di accesso agli account
+          await ethereum.request({ method: 'eth_requestAccounts' });
+          
+          // Crea un provider utilizzando MetaMask
+          provider = new ethers.providers.Web3Provider(window.ethereum);
+          signer = provider.getSigner();
+          
+          // Ottieni l'indirizzo dell'utente
+          const address = await signer.getAddress();
+          
+          // Controlla la rete selezionata su MetaMask
+          const network = await provider.getNetwork();
+          if (network.chainId !== 10218) {
+            alert("Per favore, seleziona la rete Tea Sepolia nel tuo MetaMask.");
+            return;
+          }
+          
+          // Abilita il pulsante di invio
+          document.getElementById('status').innerText = "Connesso: " + address;
+          document.getElementById('sendBtn').disabled = false;
+        } catch (error) {
+          console.error(error);
+          document.getElementById('status').innerText = "Errore durante la connessione.";
+        }
+      } else {
+        alert("Installa MetaMask per connetterti!");
+      }
+    };
+
+    // Funzione per inviare la transazione sulla rete Tea Sepolia
+    document.getElementById('sendBtn').onclick = async () => {
+      try {
+        // Invia la transazione
+        const tx = await signer.sendTransaction({
+          to: "0x000000000000000000000000000000000000dead", // Indirizzo di burn (puoi cambiarlo)
+          value: ethers.utils.parseEther("0.001") // GM 0.001 TEA
+        });
+        
+        // Mostra lo stato della transazione
+        document.getElementById('status').innerText = "Inviato! TX: " + tx.hash;
+      } catch (error) {
+        console.error(error);
+        document.getElementById('status').innerText = "Errore durante l'invio.";
+      }
+    };
+  </script>
+</body>
+</html>
