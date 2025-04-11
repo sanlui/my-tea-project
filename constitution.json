@@ -1,0 +1,10 @@
+{
+  "project_name": "my-tea-project",
+  "contributors": [
+    "sanlui"
+  ],
+  "quorum_rules": {
+    "approval_threshold": 0.5,
+    "voting_power": "equal"
+  }
+}
