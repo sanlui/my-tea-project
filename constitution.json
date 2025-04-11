@@ -1,19 +1,12 @@
 {
-  "project_name": "My Tea Project",
-  "description": "An example project for the Tea Protocol",
-  "contributors": [
-    {
-      "name": "Hassan El Buiz",
-      "role": "Main Contributor",
-      "github": "https://github.com/sanlui"
-    }
-  ],
-  "quorum_rules": {
-    "min_contributors": 2,
-    "voting_rights": "equal"
+  "name": "my-tea-project",
+  "version": "1.0.0",
+  "description": "Un progetto di esempio per Tea Protocol",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sanlui/my-tea-project.git"
   },
-  "vulnerability_management": {
-    "reporting_address": "security@mytea.com",
-    "process": "All vulnerability reports should be sent to this email."
-  }
+  "author": "Hassan El Buiz",
+  "license": "MIT"
 }
